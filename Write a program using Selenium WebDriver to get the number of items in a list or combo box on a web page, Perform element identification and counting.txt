@@ -1,0 +1,56 @@
+STEP 1: Eclipse IDE > Browse Workspace > Launch
+
+STEP 2: Eclipse IDE > Create new Java Project > Project name > Finish
+
+STEP 3: right click on project name > Build path > Configure build path > Java Build path > Libraries > Classpath
+	> Add External JARs > Add "client-combined-3.14.0.jar", "client-combined-3.14.0-sources.jar", "selenium-java.jar"
+	and "selenium-server-standalone-3.14.0.jar"> Apply and Close
+
+STEP 4: right click on project name > New > Class > Name > Finish
+
+STEP 5: Create a web page consisting of a combo box with multiple values. 
+
+ ComboBox.html 
+
+<html>
+ <body>
+ <select id='combo'>
+ <option>Volvo</option>
+ <option>Express</option>
+ <option>Mercedes</option>
+ <option>RajaHamsa</option>
+ </select>
+ </body>
+</html> 
+
+STEP 6: Write the following code for checking Webdriver
+
+package ComboBox;
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.Select;
+public class ComboBox {
+	static String driverpath = "D:\\STQA\\Selenium\\geckodriver.exe";
+	public static WebDriver driver;
+	public static void main(String[] args) {
+		System.setProperty("webdriver.gecko.driver", driverpath);
+		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+		capabilities.setCapability("marionette", true);
+		driver = new FirefoxDriver(capabilities);
+		driver.get("D:\\STQA\\Selenium\\ComboDemo.html");
+		Select oSelect = new Select(driver.findElement(By.id("combo")));
+		List<WebElement> oSize = oSelect.getOptions();
+		int iListSize = oSize.size();
+
+		for(int i=0; i<iListSize; i++) {
+			String sValue = oSelect.getOptions().get(i).getText();
+		}
+		System.out.println("Total No. of Items in Dropdown : "+iListSize);
+	}
+}
+
+STEP 6: Right click on anywhere on code window > Run as > Java application

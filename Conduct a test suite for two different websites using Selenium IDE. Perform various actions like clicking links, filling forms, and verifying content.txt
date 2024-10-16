@@ -1,0 +1,12 @@
+STEP 1: Redbus.in > copy URL > Selenium IDE> Record new test > project name > paste URL > START
+
+STEP 2: Right click anywhere > Selenium IDE > Verify > Title
+
+STEP 3: set Mumbai to Delhi and Date > Search
+
+STEP 4: Right click on bus provider name > Selenium IDE > Assert > Title
+
+STEP 5: Right click on price > Selenium IDE > Store > Text > Variable name
+
+STEP 6: ok > stop recording > name > stat recording
+

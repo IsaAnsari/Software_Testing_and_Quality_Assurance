@@ -1,0 +1,86 @@
+STEP 1: Eclipse IDE > Browse Workspace > Launch
+
+STEP 2: Eclipse IDE > Create new Java Project > Project name > Finish
+
+STEP 3: right click on project name > Build path > Configure build path > Java Build path > Libraries > Classpath
+	> Add External JARs > Add "jxl-2.6.jar" > Apply and Close
+
+STEP 4: Help > Eclipse Marketplace > search TestNG for Eclipse > Install > Confirm > Accept all terms > Finish
+
+STEP 5: right click on project name > Build path > Add libraries > select TestNG > Next
+
+STEP 6: right click on project name > New > Class > Name > Finish
+
+STEP 7: Create 2 excel sheets
+	Students.xls
+	
+	| rollno | name | X | Y | Z | Total |
+	|	1|Ram   | 60| 50| 20|	 123|
+	|	2|      | 60| 40| 20|	 123|
+	|	3|      | 60| 60| 20|	 123|
+	|	4|      | 60| 57| 20|	 123|
+	|	5|      | 60| 50| 20|	 123|
+	|	6|      | 60| 50| 20|	 123|
+
+	
+	results.xls
+
+	The Results Excel sheet must be empty we will use this for the output.
+
+STEP 8: Write the following code for checking WebDriver:
+
+package StudentResult;
+import jxl.Sheet;
+import jxl.Workbook;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+import jxl.write.*;
+import java.io.*;
+
+public class StudentResult {
+	@BeforeClass
+	public void f1()
+	{}
+	@Test
+	public void testImportExport1() throws Exception{
+		FileInputStream f1 = new FileInputStream("D:\\STQA\\Selenium\\Student.xls");
+		Workbook w = Workbook.getWorkbook(f1);
+		Sheet s = w.getSheet(0);
+		String a[][] = new String[s.getRows()][s.getColumns()];
+
+		FileOutputStream f0 = new FileOutputStream("D:\\STQA\\Selenium\\results.xls");
+		WritableWorkbook wwb = Workbook.createWorkbook(f0);
+		WritableSheet ws = wwb.createSheet("result1", 0);
+
+		for(int i=0; i<s.getRows(); i++) {
+			for(int j=0; j<s.getColumns(); j++) {
+				a[i][j] = s.getCell(j,i).getContents();
+				Label l2 = new Label(j,i,a[i][j]);
+				ws.addCell(l2);
+				Label l1 = new Label(6,0,"Result");
+				ws.addCell(l1);
+			}
+ 		}
+
+		for(int i=1; i<s.getRows(); i++) {
+			for(int j=2; j<s.getColumns(); j++) {
+				a[i][j] = s.getCell(j,i).getContents();
+				int x = Integer.parseInt(a[i][j]);
+				if(x>35) {
+					Label l1 = new Label(6,i,"Pass");
+					ws.addCell(l1);
+				}
+				else {
+					Label l1 = new Label(6,i,"Fail");
+					ws.addCell(l1);
+					break;
+				}
+			}
+		}
+		wwb.write();
+		wwb.close();
+	}
+}
+
+
+STEP 6: Right click on anywhere on code window > Run as > TestNG Test

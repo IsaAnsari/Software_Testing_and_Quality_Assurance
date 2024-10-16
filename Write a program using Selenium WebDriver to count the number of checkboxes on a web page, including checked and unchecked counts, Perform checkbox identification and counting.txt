@@ -1,0 +1,61 @@
+STEP 1: Eclipse IDE > Browse Workspace > Launch
+
+STEP 2: Eclipse IDE > Create new Java Project > Project name > Finish
+
+STEP 3: right click on project name > Build path > Configure build path > Java Build path > Libraries > Classpath
+	> Add External JARs > Add "client-combined-3.14.0.jar", "client-combined-3.14.0-sources.jar", "selenium-java.jar"
+	and "selenium-server-standalone-3.14.0.jar" > Apply and Close
+
+STEP 4: right click on project name > New > Class > Name > Finish
+
+STEP 5: Create a web page consisting of a check box with multiple values.
+
+ CHECKBox.html 
+
+<html>
+<body>
+ <form name="testform" action="" method="POST">
+ <div align="center">
+ <br>
+ <input id='c1' type="checkbox" name="option-1" value="Java">Java
+ <input id='c1' type="checkbox" name="option-2" value="C++">C++
+ <input id='c1' type="checkbox" name="option-3" value="Python">Python
+ <input id='c1' type="checkbox" name="option-4" value="PHP">PHP
+ <input id='c1' type="checkbox" name="option-5" value="CSharp">CSharp
+ <input id='c1' type="checkbox" name="option-6" value="Ruby">Ruby
+ <input id='c1' type="checkbox" name="option-7" value="Perl">Perl
+</form>
+</body>
+</html>
+
+STEP 6: Write the following code for checking Webdriver
+
+package CheckBox;
+import java.util.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+class CheckBox {
+	public static void main(String[] args) {
+		System.setProperty("webdriver.gecko.driver", "D:\\STQA\\Selenium\\geckodriver.exe");
+		WebDriver driver = new FirefoxDriver();
+		driver.get("D:\\STQA\\Selenium\\CheckBox.html");
+		int chk=0;
+		int unchk=0;
+		List<WebElement> els = driver.findElements(By.id("c1"));
+		for(WebElement el:els) {
+			if(el.isSelected()) {
+				chk++;
+			}
+			else {
+				unchk++;
+			}
+		}
+		System.out.println("Total Checked : "+chk);
+		System.out.println("Total Unchecked : "+unchk);
+	}
+}
+
+STEP 6: Right click on anywhere on code window > Run as > Java application

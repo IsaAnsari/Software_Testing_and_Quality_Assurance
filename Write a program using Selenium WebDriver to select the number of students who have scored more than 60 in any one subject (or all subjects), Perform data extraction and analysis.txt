@@ -1,0 +1,68 @@
+STEP 1: Eclipse IDE > Browse Workspace > Launch
+
+STEP 2: Eclipse IDE > Create new Java Project > Project name > Finish
+
+STEP 3: right click on project name > Build path > Configure build path > Java Build path > Libraries > Classpath
+	> Add External JARs > Add "jxl-2.6.jar" > Apply and Close
+
+STEP 4: Help > Eclipse Marketplace > search TestNG for Eclipse > Install > Confirm > Accept all terms > Finish
+
+STEP 5: right click on project name > Build path > Add libraries > select TestNG > Next
+
+STEP 6: right click on project name > New > Class > Name > Finish
+
+STEP 7: Create 2 excel sheets
+	Students.xls
+	
+	| rollno | name | X | Y | Z | Total |
+	|	1|Ram   | 60| 50| 20|	 123|
+	|	2|      | 60| 40| 20|	 123|
+	|	3|      | 60| 60| 20|	 123|
+	|	4|      | 60| 57| 20|	 123|
+	|	5|      | 60| 50| 20|	 123|
+	|	6|      | 60| 50| 20|	 123|
+
+	
+	results.xls
+
+	The Results Excel sheet must be empty we will use this for the output.
+
+STEP 8: Write the following code for checking WebDriver:
+
+package CountStud;
+import jxl.*;
+import jxl.write.*;
+import java.io.*;
+import org.testng.annotations.Test;
+
+public class CountStud {
+	@Test
+	public void testImportExport1() throws Exception{
+		FileInputStream f1 = new FileInputStream("D:\\STQA\\Selenium\\Student.xls");
+		Workbook w = Workbook.getWorkbook(f1);
+		Sheet s = w.getSheet(0);
+		String a[][] = new String[s.getRows()][s.getColumns()];
+		FileOutputStream f0 = new FileOutputStream("D:\\STQA\\Selenium\\result1.xls");
+		WritableWorkbook wwb = Workbook.createWorkbook(f0);
+		WritableSheet ws = wwb.createSheet("Result", 0);
+		int c=0;
+		for(int i=0; i<s.getRows(); i++) {
+			for(int j=0; j<s.getColumns(); j++) {
+				if(i>=1) {
+					String b = new String();
+					b = s.getCell(3, i).getContents();
+					int x = Integer.parseInt(b);
+					if(x<60) {
+						c++;
+						break;
+ 					}}
+
+				a[i][j] = s.getCell(j, i).getContents();
+				Label l2 = new Label(j,i-c,a[i][j]);
+				ws.addCell(l2);
+ 			}}
+		wwb.write();
+		wwb.close();
+	}}
+
+STEP 6: Right click on anywhere on code window > Run as > TestNG Test

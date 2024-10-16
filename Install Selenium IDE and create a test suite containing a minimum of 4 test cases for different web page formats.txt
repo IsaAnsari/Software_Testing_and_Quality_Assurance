@@ -1,0 +1,89 @@
+STEP 1: NetBeans ide > File > New Project > Java Web > Web Application > add Apache Tomcat server > Finish
+
+STEP 2: index.html
+
+<!DOCTYPE html>
+<html>
+ <head>
+ <title>Prac 1</title>
+ <script language ="javascript">
+ function addition(){
+ var num1 = parseInt(document.arithmetic.n1.value);
+ var num2 = parseInt(document.arithmetic.n2.value);
+ var result = num1 + num2;
+ document.arithmetic.res.value = result;
+ }
+ function subtraction(){
+ var num1 = parseInt(document.arithmetic.n1.value);
+ var num2 = parseInt(document.arithmetic.n2.value);
+ var result = num1 - num2;
+ document.arithmetic.res.value = result;
+ }
+ function multiplication(){
+ var num1 = parseInt(document.arithmetic.n1.value);
+ var num2 = parseInt(document.arithmetic.n2.value);
+ var result = num1 * num2;
+ document.arithmetic.res.value = result;
+ }
+ function division(){
+ var num1 = parseInt(document.arithmetic.n1.value);
+ var num2 = parseInt(document.arithmetic.n2.value);
+ var result = num1 / num2;
+ document.arithmetic.res.value = result;
+ }
+ </script>
+ </head>
+ <body>
+ <h1 align ="center">Arithmetic Operations</h1>
+ <form name="arithmetic">
+ <table border="1" align="center">
+ <tr>
+ <td> Number 1: </td>
+ <td> <input type="text" name="n1" size="20"> </td>
+ </tr>
+ <tr>
+ <td> Number 2: </td>
+ <td> <input type="text" name="n2" size="20"> </td>
+ </tr>
+ <tr>
+ <td colspan="2">
+ <input type="button" name="Add" value="addition" onclick="javascript:addition();">&nbsp;
+ <input type="button" name="Sub" value="subtraction" onclick="javascript:subtraction();">&nbsp;
+ <input type="button" name="Mul" value="multiplication" onclick="javascript:multiplication();">&nbsp;
+ <input type="button" name="Div" value="division" onclick="javascript:division();">&nbsp;
+ </td>
+ </tr>
+ <tr>
+ <td colspan="2"> Result is : <input type="text" name="res" size="20" value=""> </td>
+ </tr>
+ </table>
+ </form>
+ </body>
+</html>
+
+
+STEP 3: newjsp.jsp
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+ <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <title>JSP Page</title>
+ </head>
+ <body align="center">
+ <h1>Test Cases IDE</h1>
+ <a href="index.html">Arithmetic Operations</a>
+ </body>
+</html>
+
+
+STEP 4: Run this JSP file from NetBeans.
+• It will then open up in a browser.
+• Then from the browser, open the link:
+• Now you’ll be redirected to ARITHMETIC OPERATIONS page.
+• Copy the URL of the page and open “Selenium IDE” extension: 
+
+STEP 5: Record a new test in a new project > Project name > paste URL > Start recording
+
+STEP 6: Perform tasks and close the recording

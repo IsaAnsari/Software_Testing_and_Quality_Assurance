@@ -1,0 +1,37 @@
+STEP 1: Eclipse IDE > Browse Workspace > Launch
+
+STEP 2: Eclipse IDE > Create new Java Project > Project name > Finish
+
+STEP 3: right click on project name > Build path > Configure build path > Java Build path > Libraries > Classpath
+	> Add External JARs > Add "client-combined-3.14.0.jar", "client-combined-3.14.0-sources.jar", "selenium-java.jar"
+	and "selenium-server-standalone-3.14.0.jar"> Apply and Close
+
+STEP 4: right click on project name > New > Class > Name > Finish
+
+STEP 5: Write the following code for Webdriver:
+
+package CountLink;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+public class CountLink {
+	static String driverPath = "D:\\STQA\\Selenium\\geckodriver.exe";
+	public static FirefoxDriver driver;
+	public static void main(String[] args) {
+		System.setProperty("webdriver.gecko.driver", driverPath);
+		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+		capabilities.setCapability("marionette", true);
+		driver = new FirefoxDriver();
+		driver.get("http://www.wikipedia.com");
+
+		java.util.List<WebElement> Links = driver.findElements(By.tagName("a"));
+		System.out.println("Total links are "+Links.size());
+		for(int i=0; i<Links.size(); i++) {
+			System.out.println("Links "+i+" Link name "+Links.get(i).getText());
+		}
+	}
+}
+
+STEP 6: Right click on anywhere on code window > Run as > Java application
